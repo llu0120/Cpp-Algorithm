@@ -41,10 +41,10 @@
 class Solution {
 public:
     bool isBalanced(TreeNode* root) {
-        if (computeDepth(root) == -1) return false;
+        if (computeDepth(root) == -1) return false; // Compute depth of root, if equals to -1, this means the tree is unbalanced. 
         else return true;
     }
-    int computeDepth(TreeNode* root){
+    int computeDepth(TreeNode* root){   // Compute Depth for a node (recursive) if the difference of the depth of right and left node is larger than 1, return -1. Else, return the depth number. 
         if (!root) return 0; 
         int left = computeDepth(root->left);
         if (left == -1) return -1; 
