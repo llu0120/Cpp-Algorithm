@@ -36,7 +36,7 @@ public:
         if (head == nullptr){
             return head;
         }
-        ListNode *fast = head->next;   // fast points to 2 
+        ListNode *fast = head->next;   // fast points to 2 (If the length of list is  even return the value of center left one.)
         ListNode *slow = head;  //slow points to 1 
         while (fast != nullptr && fast -> next != nullptr){  //For the case 1->2->null, if we didn't have the condition: fast -> next != nullptr, pointer fast will move to fast->next->next. Then it will occur core dump error.
             slow = slow -> next;
