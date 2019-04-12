@@ -1,4 +1,4 @@
-//Hash map method
+//Two Pointer method
 /**
 * Given an array of integers, remove the duplicate numbers in it.
 * You should:
@@ -30,7 +30,6 @@
 */
 
 
-
 class Solution {
 public:
     /**
@@ -39,18 +38,16 @@ public:
      */
     int deduplication(vector<int> &nums) {
         // write your code here
-        vector<int> result;
-        unordered_map<int,int> hash_map;
-        for (int i = 0; i < nums.size();i++){
-            if (hash_map.find(nums[i]) == hash_map.end()){ // if nums[i] is not in the hash_map (use hash_map.end())
-                hash_map[nums[i]] == nums[i];
-                result.push_back(nums[i]);
+        if (nums.size() == 0) return NULL;
+        sort(nums.begin(), nums.end());
+        int slow = 0; 
+        for (int fast = 0; fast < nums.size(); fast++){
+            if (nums[slow] != nums[fast]){  
+                slow++;                     //slow moves 1 becasue there is a unique integers 
+                nums[slow] = nums[fast];    //Then change the nums[slow] into nums[fast] to do the next comparison
             }
+            else continue;
         }
-        nums = result; //Do it in place in the array.
-        return result.size();
+        return (slow + 1);
     }
 };
-
-
-//Two Pointer methode
