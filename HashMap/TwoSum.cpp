@@ -11,22 +11,24 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-    unordered_map<int,int> hash_map;
-    vector<int> result;
-    // initialize hash map
-    for (int i = 0; i < nums.size(); i++){
-        hash_map[nums[i]] = i; // key ---> value
-    }
-    // trasversal hash map
-    for (int i = 0; i < nums.size(); i++){
-        int diff = target - nums[i];
-        if (hash_map.count(diff) && hash_map[diff] != i){ //find if diff is in the hash map and the diff cannot be the original i
-            result.push_back(i);
-            result.push_back(hash_map[diff]);
-            break;
+        unordered_map<int, int> map;
+        vector<int> result;
+        int diff;
+	// initialize hash map
+        for (int i = 0; i < nums.size(); i++){
+            map[nums[i]] = i; // key ---> value
         }
+	// trasversal hash map
+        for (int i = 0; i < nums.size(); i++){
+            diff = target - nums[i]; 
+            if (map.find(diff) != map.end() && map[diff] != i){ //find if diff is in the hash map and the diff cannot be the original i
+                result.push_back(i);
+                result.push_back(map[diff]);
+                break;
+            } else {
+                continue;
+            }
+        }
+        return result;
     }
-    return result;
-    }
-                             
 };
