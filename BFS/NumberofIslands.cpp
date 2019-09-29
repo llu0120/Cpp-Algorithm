@@ -28,47 +28,58 @@ Output:
 
 class Solution {
 public:
-    /**
-     * @param grid: a boolean 2D matrix
-     * @return: an integer
-     */
-    vector<pair<int,int>> directions{{1,0},{-1,0},{0,1},{0,-1}};
-    int numIslands(vector<vector<bool>> &grid) {
-        // write your code here
-        if (grid.size() == 0) return 0; 
-        int count = 0;
-        for (int i = 0; i < grid.size(); i++){
-            for (int j = 0; j < grid[0].size(); j++){
-                if (grid[i][j] == false) continue; // if grid is 0 or has been visited, then continue
-                bfs(grid, make_pair(i,j));
-                count++;
+    vector<pair<int, int> > DIRECTIONS{{1,0},{-1,0},{0,1},{0,-1}};
+    int numIslands(vector<vector<char>>& grid) {
+        //Corner Case:
+        if (grid.size() == 0) {
+            return 0;
+        }
+        int row_size = grid.size(); 
+        int col_size = grid[0].size();
+        //General Case: 
+        int count = 0; 
+        for (int i = 0; i< row_size; i++) {
+            for (int j = 0; j < col_size; j++) {
+                if (grid[i][j] == '0') { //Visited before or is '0'
+                    continue;
+                } else {
+                    bfs(grid, make_pair(i,j));
+                    count++;
+                } 
             }
         }
-        return count;
+        return count; 
     }
-    
-    bool isValid(vector<vector<bool>>& grid, pair<int,int> loc){
-        if (loc.first < 0 || loc.first >= grid.size()) return false;// Out of bound
-        if (loc.second < 0 || loc.second >= grid[0].size()) return false; //Out of bound
-        if (grid[loc.first][loc.second] == false) return false;  //See if this node has been visit or not 
+    bool isValid(vector<vector<char> >& grid, pair<int, int> loc) {
+        int row_size = grid.size(); 
+        int col_size = grid[0].size();
+        if (loc.first < 0 || loc.first >= row_size) { //Out of Bound
+            return false;
+        } 
+        if (loc.second < 0 || loc.second >= col_size) { //Out of Bound
+            return false;
+        }
+        if (grid[loc.first][loc.second] == '0') { //Visited before or is water
+            return false;
+        } 
         return true;
     }
-    
-    void bfs(vector<vector<bool>> &grid, pair<int,int> loc){
-        queue<pair<int,int>> Q; // Initialize a queue;
-        Q.push(loc); // push the node into the queue
-        grid[loc.first][loc.second] = false;    // Set this node to 0 --> means visited
-        while (!Q.empty()){
-            pair<int,int> tmp = Q.front();
-            Q.pop();                            // pop the node: FIFO 
-            for (auto direction: directions){
-                pair<int,int> next_loc = make_pair(tmp.first + direction.first, tmp.second + direction.second);
-                if (!isValid(grid,next_loc)) continue;
-                Q.push(next_loc);               //Add next_loc into queue
-                grid[next_loc.first][next_loc.second] = false;
+    void bfs(vector<vector<char> >& grid, pair<int, int> loc) {
+        queue<pair<int, int>> q;
+        q.push(loc);
+        grid[loc.first][loc.second] = '0'; //Means visited
+        while (!q.empty()) {
+            pair<int, int> tmp_loc = q.front(); 
+            q.pop();
+            for (auto dir: DIRECTIONS) {
+                pair<int,int> next_loc = make_pair(tmp_loc.first + dir.first, tmp_loc.second + dir.second);
+                if (!isValid(grid, next_loc)) {
+                    continue;
+                }
+                q.push(next_loc); 
+                grid[next_loc.first][next_loc.second] = '0'; //Means visited
             }
-            
         }
+        
     }
-    
 };
