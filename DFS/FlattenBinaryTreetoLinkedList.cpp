@@ -48,7 +48,34 @@
  *     }
  * }
  */
-//DFS Recursive 
+//DFS Recursive
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if (root == NULL) {
+            return ; 
+        }
+        if (root->left != NULL) {
+            flatten(root->left);        
+        }
+        if (root->right != NULL) {
+            flatten(root->right);        
+        }
+        if (root->left == NULL) { //This means all the node are on the right now --> finished flatten
+            return; 
+        } 
+        //for example set root = 2 
+        TreeNode* tmp = root->left; //Stored the left node as tmp --> store 3
+        while (tmp->right != NULL) { //If the tmp still have right node, keep traverse to the rightest node --> 3 is has no right node 
+            tmp = tmp->right; 
+        }
+        tmp->right = root->right; //When arrived the rightest node, bridge the original right node to the tmp->right --> brige 4 on to 3
+        root->right = root->left; //Then bridge the left node on to the root --> bridge 3 on to 2
+        root->left = NULL; //Set the root->left to null
+        
+    }
+};
+ 
 class Solution {
 public:
     /**
