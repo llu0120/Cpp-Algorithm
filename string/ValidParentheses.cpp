@@ -51,6 +51,6 @@ public:
                 stack.pop();
             }
         }
-        return stack.empty(); //If stack is not empty --> false (there left an element inside the stack)
+        return stack.empty(); //If stack is not empty --> false (this there left an element inside the stack)
     }
 };
