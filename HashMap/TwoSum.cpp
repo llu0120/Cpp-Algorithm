@@ -16,7 +16,7 @@ public:
         int diff;
 	// initialize hash map
         for (int i = 0; i < nums.size(); i++){
-            map[nums[i]] = i; // key ---> value
+            map[nums[i]] = i; // key(num) ---> value(index)
         }
 	// trasversal hash map
         for (int i = 0; i < nums.size(); i++){
