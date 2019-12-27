@@ -53,9 +53,12 @@ public:
             tmp_result.push_back(oneLevelNode);    
         }
         vector<vector<int>> result;
-        for (int i = tmp_result.size()-1; i >= 0; i--) {
+        vector<vector<int>> result(tmp_result.rbegin(), tmp_result.rend());
+		/*
+		for (int i = tmp_result.size()-1; i >= 0; i--) {
             result.push_back(tmp_result[i]);
         }
+		*/
         return result;
     }
 };
