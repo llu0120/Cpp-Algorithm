@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/LuLienHsi/Cpp-Algorithm/OA/VecnaOA/problem6/problem6.cpp
+chrono
+-
+iostream
+-
+set
+-
+vector
+-
+unordered_set
+-
+
