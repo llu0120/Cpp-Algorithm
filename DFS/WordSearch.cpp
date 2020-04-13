@@ -55,13 +55,13 @@ public:
         }
         //To pass the board into the recursive function, need to set the current position to 0 
         char cur = board[y][x];
-        board[y][x] = 0;
+        board[y][x] = 0; //Mean visited
         //four direction 
         bool found = dfsSearch(board, word, x+1, y, d+1)
                     || dfsSearch(board, word, x-1, y, d+1)
                     || dfsSearch(board, word, x, y+1, d+1)
                     || dfsSearch(board, word, x, y-1, d+1);
-        board[y][x] = cur;
+        board[y][x] = cur; //Recover the original status 
         return found;
     }
 };
